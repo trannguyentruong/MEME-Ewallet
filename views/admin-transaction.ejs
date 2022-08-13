@@ -1,0 +1,208 @@
+<div class="transaction-wrapper" id="admin-transaction">
+    <h5>TRANSACTION MANAGEMENT</h5>
+    <hr>
+    <p>
+        Approve pending withdrawals and transfers
+    </p>
+    <div class="col-md-2  mb-2">
+        <select class="form-control transac-selection">
+            <option value="All">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Success">Success</option>
+        </select>
+    </div>
+    <div class="row ml-0 mr-0 transaction--table">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Execution Time</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="admin-transaction-tbody">
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- List icon for transaction
+Withdraw: <i class="fa-solid fa-circle-arrow-up"></i>
+Transfer: <i class="fa-solid fa-repeat"></i>
+ -->
+
+<!-- List of transaction status
+Pending: <span class="badge badge-warning">Pending</span>
+ -->
+
+<!--           MODAL             -->
+
+<!-- View transaction detail Modal : WITHDRAWALS TYPE -->
+<div class="modal fade" id="viewWithdrawAdminModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewWithdrawAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewWithdrawAdminModalLabel">
+                    Transaction Details
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center mb-3">
+                    <h5>WITHDRAWAL</h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Transaction ID</h6>
+                        <p>14629124</p>
+                    </div>
+                    <div class="col">
+                        <h6>User ID</h6>
+                        <p>9237595</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Fee</h6>
+                        <p>0 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                    <div class="col">
+                        <h6>Total</h6>
+                        <p>-5.000.000 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#approveModal"
+                    data-dismiss="modal">Approve</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal"
+                    data-target="#notApproveModal">Not Approve</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View transaction detail Modal : TRANSFER TYPE -->
+<div class="modal fade" id="viewTransferAdminModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewTransferAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewTransferAdminModalLabel">
+                    Transaction Details
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center mb-3">
+                    <h5>TRANSFER</h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Transaction ID</h6>
+                        <p>14629124</p>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Sender ID</h6>
+                        <p>9237595</p>
+                    </div>
+                    <div class="col">
+                        <h6>Receiver ID</h6>
+                        <p>9237595</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Fee</h6>
+                        <p>0 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                    <div class="col">
+                        <h6>Total</h6>
+                        <p>-5.000.000 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Message</h6>
+                        <p>"Love u"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#approveModal"
+                    data-dismiss="modal">Approve</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal"
+                    data-target="#notApproveModal">Not Approve</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Confirm Modal: approve -->
+<div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="approveModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="approveModalLabel">
+                    Approve Transaction
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to approve this transaction?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Confirm Modal: not approve -->
+<div class="modal fade" id="notApproveModal" tabindex="-1" role="dialog" aria-labelledby="notApproveModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notApproveModalLabel">
+                    Not Approve Transaction
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to not approve this transaction?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

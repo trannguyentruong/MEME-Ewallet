@@ -1,0 +1,412 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Service</li>
+    </ol>
+</nav>
+<div class="service-wrapper" data-status="<%= status %>">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item">
+            <a class="nav-link active ann-role" data-toggle="tab" href="#rechargeTab">Recharge</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link ann-role" data-toggle="tab" href="#withdrawTab">Withdraw</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link ann-role" data-toggle="tab" href="#transferTab">Transfer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link ann-role" data-toggle="tab" href="#buyCardTab">Buy Card Code</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <!-- RECHARGE TAB -->
+        <div id="rechargeTab" class="container tab-pane active"><br>
+            <h3>RECHARGE</h3>
+            <p>Recharge your account with credit card.</p>
+            <hr>
+            <form method="POST" name="rechargeForm">
+                <div class="form-group mb-5 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label class="text-center w-100">AMOUNT <span class="text-danger">*</span></label>
+                        <div class="input-group service--amount">
+                            <input name="recharge-amount" type="text"
+                                class="service--amount-input recharge-amount-input" aria-describedby="dong-addon"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                required>
+                            <span class="focus-border"></span>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="dong-addon"><i
+                                        class="fa-solid fa-dong-sign"></i></span>
+                            </div>
+
+                        </div>
+                        <div class="recharge-amount-message">
+                            Amount cannot be left blank
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <h6 class="w-100 text-center">CREDIT CARD DETAIL</h6>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Card Number <span class="text-danger">*</span></label>
+                        <input name="recharge-cardnumber" type="text" class="form-control recharge-cardnumber-input"
+                            maxlength="6" placeholder="Enter the 6-digit number on the card"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                            required>
+                        <div class="recharge-cardnumber-message">
+                            This card is not supported.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Expiry Date <span class="text-danger">*</span></label>
+                        <input name="recharge-expirydate" type="date" class="form-control recharge-date-input">
+                        <div class="recharge-date-message">
+                            Invalid expiry date.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>CVV Number <span class="text-danger">*</span></label>
+                        <input name="recharge-cvvnumber" type="text" class="form-control recharge-cvv-input"
+                            maxlength="3" placeholder="Enter the 3-digit number on the card"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                            required>
+                        <div class="recharge-cvv-message">
+                            Invalid CVV number.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <button class="btn service-submit form-control submit-recharge" type="button">Confirm</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- WITHDRAW TAB -->
+        <div id="withdrawTab" class="container tab-pane fade"><br>
+            <h3>WITHDRAW</h3>
+            <p>Withdraw money to your credit card.</p>
+
+            <form method="post" name="withdrawForm">
+                <div class="form-group mb-5 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label class="text-center w-100">AMOUNT <span class="text-danger">*</span></label>
+                        <div class="input-group service--amount">
+                            <input name="withdraw-amount" type="text"
+                                class="service--amount-input withdraw-amount-input" aria-describedby="dong-addon"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <span class="focus-border"></span>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="dong-addon"><i
+                                        class="fa-solid fa-dong-sign"></i></span>
+                            </div>
+                        </div>
+                        <div class="withdraw-amount-message">
+                            Amount cannot be left blank
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <h6 class="w-100 text-center">CREDIT CARD DETAIL</h6>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Card Number <span class="text-danger">*</span></label>
+                        <input name="withdraw-cardnumber" type="text" class="form-control" maxlength="6"
+                            placeholder="Enter the 6-digit number on the card"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Expiry Date <span class="text-danger">*</span></label>
+                        <input name="withdraw-expirydate" type="date" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>CVV Number <span class="text-danger">*</span></label>
+                        <input name="withdraw-cvvnumber" type="text" class="form-control" maxlength="3"
+                            placeholder="Enter the 3-digit number on the card"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Note</label>
+                        <input name="withdraw-note" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center ">
+                    <div class="col-xl-2 col-sm-10 col-lg-8 ">
+                        <h6>Fee(5%): </h6>
+                    </div>
+                    <div class="col-xl-2 col-sm-10 col-lg-8 text-right">
+                        <h6 class="withdraw-fee"><i class="fa-solid fa-dong-sign"></i></h6>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center ">
+                    <div class="col-xl-2 col-sm-10 col-lg-8 ">
+                        <h5>Total: </h5>
+                    </div>
+                    <div class="col-xl-2 col-sm-10 col-lg-8 text-right">
+                        <h5 class="withdraw-total-fee"><i class="fa-solid fa-dong-sign"></i></h5>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <button class="btn service-submit form-control submit-withdraw" type="button">Confirm</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- TRANSFER TAB -->
+        <div id="transferTab" class="container tab-pane fade" data-email="<%= email %>"><br>
+            <h3>TRANSFER</h3>
+            <p>Transfer money to another account.</p>
+
+            <form method="post">
+                <div class="form-group mb-5 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label class="text-center w-100">AMOUNT <span class="text-danger">*</span></label>
+                        <div class="input-group service--amount">
+                            <input name="transfer-amount" type="text" class="service--amount-input"
+                                aria-describedby="dong-addon"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                            <span class="focus-border"></span>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="dong-addon"><i
+                                        class="fa-solid fa-dong-sign"></i></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Receiver's Phone Number <span class="text-danger">*</span></label>
+                        <input name="receiver" type="text" class="form-control key-up-receiver"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Receiver Name: </label>
+                        <input id="receiver-name" type="text" class="form-control " disabled
+                            placeholder="Receiver Name Display Here">
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Fee Bearer</label>
+                        <select class="form-control" name="bearer" id="bearer-select">
+                            <option value="Sender">Sender</option>
+                            <option value="Receiver">Receiver</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Note</label>
+                        <input name="transfer-note" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center ">
+                    <div class="col-xl-2 col-sm-10 col-lg-8 ">
+                        <h6>Fee(5%): </h6>
+                    </div>
+                    <div class="col-xl-2 col-sm-10 col-lg-8 text-right">
+                        <h6 class="transfer-fee"><i class="fa-solid fa-dong-sign"></i></h6>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center ">
+                    <div class="col-xl-2 col-sm-10 col-lg-8 ">
+                        <h5>Total: </h5>
+                    </div>
+                    <div class="col-xl-2 col-sm-10 col-lg-8 text-right">
+                        <h5 class="transfer-total"><i class="fa-solid fa-dong-sign"></i></h5>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <button class="btn service-submit form-control transfer-otp-toggle submit-transfer"
+                            type="button">Confirm</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- BUY CARD TAB -->
+        <div id="buyCardTab" class="container tab-pane fade"><br>
+            <h3>BUY CARD CODE</h3>
+            <p>Buy phone card.</p>
+            <form method="post">
+
+
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Service Provider</label>
+                        <select class="form-control card-select-type" name="provider">
+                            <option value="Viettel">Viettel</option>
+                            <option value="Mobiphone">Mobiphone</option>
+                            <option value="Vinaphone">Vinaphone</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Value</label>
+                        <select class="form-control card-price" name="value">
+                            <option value="10000">10.000 </option>
+                            <option value="20000">20.000 </option>
+                            <option value="50000">50.000 </option>
+                            <option value="100000">100.000 </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <label>Quantity</label>
+                        <input type="number" class="form-control card-quantity" value="1" min="1" max="5"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center ">
+                    <div class="col-xl-2 col-sm-10 col-lg-8 ">
+                        <h6>Fee: </h6>
+                    </div>
+                    <div class="col-xl-2 col-sm-10 col-lg-8 text-right">
+                        <h6>0 <i class="fa-solid fa-dong-sign"></i></h6>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center ">
+                    <div class="col-xl-2 col-sm-10 col-lg-8 ">
+                        <h5>Total: </h5>
+                    </div>
+                    <div class="col-xl-2 col-sm-10 col-lg-8 text-right">
+                        <h5 class="card-total">10000<i class="fa-solid fa-dong-sign"></i></h5>
+                    </div>
+                </div>
+                <div class="form-group mb-3 row justify-content-center">
+                    <div class="col-xl-4 col-sm-10 col-lg-8">
+                        <button class="btn service-submit form-control submit-buycard" type="button">Confirm</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="otpTransferModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">OTP Vertification</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- need to pass the user email into modal -->
+                <p class="text-center">Enter the OTP sent to <strong class="strong-text"></strong></p>
+                <form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false"
+                    autocomplete="off">
+                    <div class="test">
+                        <input type="text" id="digit-1" name="digitMono" data-next="digit-2" class="form-control" />
+                        <input type="text" id="digit-2" name="digitDi" data-next="digit-3" data-previous="digit-1"
+                            class="form-control" />
+                        <input type="text" id="digit-3" name="digitTri" data-next="digit-4" data-previous="digit-2"
+                            class="form-control" />
+                        <input type="text" id="digit-4" name="digitTetra" data-next="digit-5" data-previous="digit-3"
+                            class="form-control" />
+                        <input type="text" id="digit-5" name="digitPenta" data-next="digit-6" data-previous="digit-4"
+                            class="form-control" />
+                        <input type="text" id="digit-6" name="digitHexa" data-previous="digit-5" class="form-control" />
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="btn-service-otp" style="color:black" class="btn btn-primary ">Verify</button>
+                <button type="button" class="btn btn-otp btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="NotUserStatus">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">This feature just only for activated account</h4>
+                <a href="/"> <button type="button" class="close">&times;</button></a>
+            </div>
+            <div class="modal-footer">
+                <a><button type="button" data-dismiss="modal" class="btn">Close</button> </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSuccessTrans">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title success-trans">Action successful</h4>
+                <a href="/"> <button type="button" class="close">&times;</button></a>
+            </div>
+            <div class="modal-footer">
+                <a><button type="button" data-dismiss="modal" class="btn">Close</button> </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fail alert -->
+<div class="alert alert-danger alert-dismissible" id="withdrawInvalidCard" role="alert">
+    Invalid Card Information
+    <button type="button" class="close" onclick="$('#withdrawInvalidCard').hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="alert alert-danger alert-dismissible" id="withdrawNotSupport" role="alert">
+    This card is not supported for withdrawals.
+    <button type="button" class="close" onclick="$('#withdrawNotSupport').hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

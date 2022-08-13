@@ -1,0 +1,296 @@
+<div class="user-detail-wrapper">
+    <h6>USER DETAIL</h6>
+    <hr />
+
+    <div class="row no-gutters">
+        <!-- User avatar -->
+        <div class="col-md-2 col-sm-3 mb-2">
+            <div class="user-detail-avatar"><img src="" /></div>
+        </div>
+        <div class="col-md-3 col-sm-3 user-filter" data-email="<%= infoFilter.email %>">
+            <h5 data-toggle="tooltip" data-placement="left" title="Full Name">
+                <%= infoFilter.name %>
+            </h5>
+            <p data-toggle="tooltip" data-placement="left" title="Phone Number">
+                <i class="fa-solid fa-phone-flip mr-2"></i><%= infoFilter.phone %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Email">
+                <i class="fa-solid fa-envelope mr-2"></i><%= infoFilter.email %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Birthday">
+                <i class="fa-solid fa-cake-candles mr-2"></i><%= infoFilter.birthday %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Address">
+                <i class="fa-solid fa-location-dot mr-2"></i><%= infoFilter.address %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Identify Card Number">
+                <i class="fa-solid fa-address-card mr-2"></i><%= infoFilter.ICID %>
+                <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-primary user-detail-idcard"
+                    data-toggle="tooltip" data-placement="top" title="View Identify Card Photos"></i>
+            </p>
+        </div>
+
+        <div class="col-md-2 col-sm-3 status-div">
+            <h6>Account status</h6>
+
+            <% if(infoFilter.status=='Activated' ) { %>
+            <span class="badge badge-success">Activated</span>
+            <% } %>
+
+            <% if(infoFilter.status=='Pending' || infoFilter.status=='Updating') { %>
+            <span class="badge badge-warning"><%= infoFilter.status %></span>
+            <% } %>
+
+            <% if(infoFilter.status=='Deactivated' ) { %>
+            <span class="badge badge-secondary">Deactivated</span>
+            <% } %>
+
+            <% if(infoFilter.status=='Blocked' ) { %>
+            <span class="badge badge-danger">Blocked</span>
+            <% } %>
+
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <h6>Action</h6>
+            <% if(infoFilter.status=='Activated' ) { %>
+                <button class="btn btn-outline-danger mb-2" data-toggle="modal"
+                    data-target="#deactivateModal">Deactivate</button><br />
+                <button class="btn btn-outline-warning" data-toggle="modal" data-target="#requestModal">
+                    Request additional information
+                </button>
+            <% } %>
+            <% if(infoFilter.status=='Updating' ) { %>
+                <button class="btn btn-outline-success mb-2" data-toggle="modal"
+                data-target="#activateModal">Activate</button><br />
+                <button class="btn btn-outline-danger mb-2" data-toggle="modal"
+                    data-target="#deactivateModal">Deactivate</button><br />
+                <button class="btn btn-outline-warning" data-toggle="modal" data-target="#requestModal">
+                    Request additional information
+                </button>
+            <% } %>
+            
+            <% if(infoFilter.status=='Pending' ) { %>
+            <button class="btn btn-outline-success mb-2" data-toggle="modal"
+                data-target="#activateModal">Activate</button><br />
+            <button class="btn btn-outline-danger mb-2" data-toggle="modal"
+                data-target="#deactivateModal">Deactivate</button><br />
+            <button class="btn btn-outline-warning" data-toggle="modal" data-target="#requestModal">
+                Request additional information
+            </button>
+            <% } %>
+
+            <% if(infoFilter.status=='Deactivated' ) { %>
+            <button class="btn btn-outline-success mb-2" data-toggle="modal"
+                data-target="#activateModal">Activate</button><br />
+            <% } %>
+
+            <% if(infoFilter.status=='Blocked' ) { %>
+            <button class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#unlockModal">Unlock</button>
+            <% } %>
+        </div>
+    </div>
+
+
+    <h6 class="mt-5">TRANSACTION HISTORY</h6>
+    <hr>
+    <div class="row ml-1 mr-1">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Execution Time</th>
+                    <th scope="col">Status</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><i class="fa-solid fa-circle-arrow-down"></i></th>
+                    <td>Recharge</td>
+                    <!-- use javascript to format the total instead of below  -->
+                    <td>+10.000.000 <i class="fa-solid fa-dong-sign"></i></td>
+                    <td>02:14 20-04-2022</td>
+                    <td> <span class="badge badge-success">Successful</span></td>
+
+
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fa-solid fa-circle-arrow-up"></i></th>
+                    <td>Withdraw</td>
+                    <!-- use javascript to format the total instead of below  -->
+                    <td>-5.000.000 <i class="fa-solid fa-dong-sign"></i></td>
+                    <td>08:32 21-04-2022</td>
+                    <td><span class="badge badge-success">Approved</span></td>
+
+
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fa-solid fa-repeat"></i></th>
+                    <td>Transfer</td>
+                    <!-- use javascript to format the total instead of below  -->
+                    <td>-1.000.000 <i class="fa-solid fa-dong-sign"></i></td>
+                    <td>02:14 20-04-2022</td>
+                    <td><span class="badge badge-secondary">Cancel</span></td>
+
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- List Status
+Pending ( wait for update: use Updating, Wait for Activate: use Pending): <span class="badge badge-warning">Pending/Updating</span> 
+Activated: <span class="badge badge-success">Activated</span>
+Deactivated: <span class="badge badge-secondary">Deactivated</span>
+Blocked: <span class="badge badge-danger">Locked</span> -->
+
+
+
+<!-- List icon for transaction
+Recharge: <i class="fa-solid fa-circle-arrow-down"></i>
+Withdraw: <i class="fa-solid fa-circle-arrow-up"></i>
+Transfer: <i class="fa-solid fa-repeat"></i>
+Buy card: <i class="fa-solid fa-sim-card"></i> -->
+
+<!-- List of transaction status
+    Recharge + Buy card only use successful or failed
+Pending: <span class="badge badge-warning">Pending</span>
+Approved or Successful (approved for withdraw or transfer only): <span class="badge badge-success">Approved/Successful</span>
+Cancel: <span class="badge badge-secondary">Cancel</span>
+Failed: <span class="badge badge-danger">Failed</span>  -->
+
+
+<!--           MODAL             -->
+
+<!-- View Identify Card Photo Modal -->
+<div class="modal fade" id="viewIDCPhotoModal" tabindex="-1" role="dialog" aria-labelledby="viewIDCPhotoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewIDCPhotoModalLabel">
+                    Identify Card Photos
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Photo of the front of the identity card</p>
+                <img class="d-block w-75 mx-auto" src="/users/<%= infoFilter.front %>" alt="Front photo" />
+                <hr />
+                <p>Photo of the back of the identity card</p>
+                <img class="d-block w-75 mx-auto" src="/users/<%= infoFilter.back %>"" alt="Back photo" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Confirm Modal: Activate -->
+<div class="modal fade" id="activateModal" tabindex="-1" role="dialog" aria-labelledby="activateModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activateModalLabel">
+                    Activate Account
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to activate this account?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary btn-stt-activate" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Modal: Deactivate -->
+<div class="modal fade" id="deactivateModal" tabindex="-1" role="dialog" aria-labelledby="deactivateModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deactivateModalLabel">
+                    Deactivate Account
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to deactivate this account?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary btn-stt-deactivate" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Modal: Request -->
+<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="requestModalLabel">
+                    Request additional information
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to request addtional information?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary btn-stt-request " data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Modal: Unlock -->
+<div class="modal fade" id="unlockModal" tabindex="-1" role="dialog" aria-labelledby="unlockModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unlockModalLabel">
+                    Unlock Account
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to unlock this account?</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary btn-unlock-account" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

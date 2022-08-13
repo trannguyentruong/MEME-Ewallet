@@ -1,0 +1,51 @@
+<div class="first-login--container">
+
+    <div class="first-login--form">
+        <h4 class="text-center mb-5">You must change your password before using our services</h4>
+        <form method="POST" id="firstChangePwdForm" action="/user/changePwd">
+            <div class="form-group">
+
+                <label>Enter new password</label>
+                <div class="password--wrapper">
+                    <div class="input-group mb-3 password-dot">
+                        <input name="pwdMot" type="password" placeholder="&#9679;"
+                        class="form-control password-dots out--dot-left dot-start" maxlength="1">
+                        <input name="pwdHai" type="password" placeholder="&#9679;"
+                            class="form-control password-dots out--dot-left" maxlength="1">
+                        <input name="pwdBa" type="password" placeholder="&#9679;"
+                            class="form-control password-dots out--dot-left" maxlength="1">
+                        <input name="pwdBon" type="password" placeholder="&#9679;"
+                            class="form-control password-dots out--dot-right" maxlength="1">
+                        <input name="pwdNam" type="password" placeholder="&#9679;"
+                            class="form-control password-dots out--dot-right" maxlength="1">
+                        <input name="pwdSau" type="password" placeholder="&#9679;"
+                            class="form-control password-dots out--dot-right dot-end" maxlength="1">
+                        </div>
+
+                </div>
+                <div class="form-group">
+
+                    <label>Re-enter new password</label>
+                    <div class="password--wrapper">
+                        <div class="input-group mb-3 password-dot">
+                            <input name="password-1" type="password" placeholder="&#9679;"
+                                class="form-control password-dots out--dot-left dot-start" maxlength="1">
+                            <input name="password-2" type="password" placeholder="&#9679;"
+                                class="form-control password-dots out--dot-left" maxlength="1">
+                            <input name="password-3" type="password" placeholder="&#9679;"
+                                class="form-control password-dots out--dot-left" maxlength="1">
+                            <input name="password-4" type="password" placeholder="&#9679;"
+                                class="form-control password-dots out--dot-right" maxlength="1">
+                            <input name="password-5" type="password" placeholder="&#9679;"
+                                class="form-control password-dots out--dot-right" maxlength="1">
+                            <input name="password-6" type="password" placeholder="&#9679;"
+                                class="form-control password-dots out--dot-right dot-end" maxlength="1">
+                        </div>
+
+                    </div>
+                    <div class="form-group text-center ">
+                        <button class="btn" type="submit">Submit</button>
+                    </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <h3>MeMe.</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+
+        <li class="<% if(address=='home') { %>active <% } %>">
+            <a href="/admin"><i
+                class="fa-solid fa-home pr-2"></i>Home</a>
+        </li>
+        <li class="<% if(address=='user') { %>active <% } %>">
+            <a href="/admin"><i class="fa-solid fa-user pr-2"></i>Manage User</a>
+        </li>
+        <li class="<% if(address=='transaction') { %>active <% } %>">
+            <a href="/admin/transaction"><i
+                class="fa-solid fa-file-lines pr-2"></i>Manage Transaction</a>
+        </li>
+        <li>
+            <a href="/logout"><i
+                class="fa-solid fa-right-from-bracket pr-2"></i>Log out</a>
+        </li>
+
+    </ul>
+</nav>
+
+
+<!-- dropdown menu template
+<a href="/admin/" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Manage transaction</a>
+<ul class="collapse list-unstyled" id="pageSubmenu">
+    <li>
+        <a href="#">Page 1</a>
+    </li>
+    <li>
+        <a href="#">Page 2</a>
+    </li>
+    <li>
+        <a href="#">Page 3</a>
+    </li>
+</ul> -->

@@ -1,0 +1,192 @@
+<div class="register--container">
+
+    <div class="container">
+        <a href="/" class="brand--logo">
+            <h3 class="my-3 text-dark ">Meme.</h3>
+        </a>
+        <form enctype="multipart/form-data" id="register-form" method="POST" action="/user/register">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 col-xl-5">
+
+
+                    <div class="container register--form-fullname">
+                        <div class="row ">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="firstname">First Name</label>
+                                    <div class="input-group mb-3">
+
+                                        <input name="firstname" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="lastname">Last Name</label>
+                                    <div class="input-group mb-3">
+
+                                        <input name="lastname" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <div class="input-group mb-3">
+
+                            <input name="phone" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-group mb-3">
+
+                            <input name="email" id="email" type="text" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday">Birthday</label>
+                        <div class="input-group mb-3">
+
+                            <input name="birthday" type="date" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <div class="input-group mb-3">
+
+                            <input name="address" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ICcard">Identity Card Number</label>
+                        <div class="input-group mb-3">
+                            <input name="ICcard" type="text" class="form-control">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button class="btn btn-register" id="btn-register" type="submit">Register</button>
+                    </div>
+                    <div class="form-group">
+                        <p>Already have an account? <a href="/login" class="text-dark">Login now!</a></p>
+                    </div>
+
+
+                </div>
+
+                <!-- Upload photo -->
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Photo of the front of the identity card</label>
+                                <div class="input-group mb-3 px-2 rounded bg-white shadow-sm">
+                                    <input name="frontPhoto" type="file" accept="image/*"
+                                        class="form-control border-0 register--form-upload"
+                                        onchange="previewFrontImg(this);" id="registerFrontUpload">
+                                    <label class="font-weight-light text-muted register--form-label">Choose
+                                        file</label>
+                                    <div class="input-group-append">
+                                        <label for="registerFrontUpload" class="btn btn-light my-2 rounded"
+                                            id="registerFrontLabel"> <i
+                                                class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                                class="text-uppercase font-weight-bold text-muted">Choose
+                                                file</small></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Photo of the back of the identity card</label>
+                                <div class="input-group mb-3 px-2 rounded bg-white shadow-sm">
+                                    <input name="backPhoto" type="file" accept="image/*"
+                                        class="form-control border-0 register--form-upload"
+                                        onchange="previewBackImg(this);" id="registerBackUpload">
+                                    <label class="font-weight-light text-muted register--form-label">Choose
+                                        file</label>
+                                    <div class="input-group-append">
+                                        <label for="registerBackUpload" class="btn btn-light my-2 rounded"
+                                            id="registerBackLabel"> <i
+                                                class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                                class="text-uppercase font-weight-bold text-muted">Choose
+                                                file</small></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="register--image-area"><img id="registerFrontImg" src="#" alt=""
+                                    class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                        </div>
+
+                        <div class="col">
+                            <div class="register--image-area"><img id="registerBackImg" src="#" alt=""
+                                    class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Register successfully, generate username and password -->
+<div class="modal fade" id="successfullRegisterModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Register Successfully</h4>
+                <a href="/"> <button type="button" class="close">&times;</button></a>
+            </div>
+
+            <div class="modal-body">
+
+                <p>Username: <strong class="account-username"></strong></p>
+                <p>Password: <strong class="account-password"></strong></p>
+                <p><a href="/login" class="text-dark">Login now!</a></p>
+            </div>
+
+            <div class="modal-footer">
+                <a href="/"><button type="submit" class="btn">Close</button> </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fail alert -->
+<% if(error.length >0) {%>
+<div class="alert alert-danger alert-dismissible show" role="alert">
+    <%= error %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% } %>
+<% if(success.length > 0){ %>
+<!-- Correct OTP Alert -->
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= success %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% } %>

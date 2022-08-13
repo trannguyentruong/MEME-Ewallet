@@ -1,0 +1,56 @@
+<div class="user-wrapper admin-user-page">
+    <h5>USER MANAGEMENT</h5>
+    <hr>
+
+    <!-- Select user type here -->
+    <div class="row no-gutters ">
+        <div class="col-md-1 col-sm-3 mb-2">
+            <p class="mb-0 mt-2">User Type: </p>
+        </div>
+        <div class="col-md-2  mb-2">
+            <select class="form-control user-selection">
+                <option value="All">All</option>
+                <option value="Pending">Pending</option>
+                <option value="Activated">Activated</option>
+                <option value="Deactivated">Deactivated</option>
+                <option value="Blocked">Blocked</option>
+            </select>
+        </div>
+
+        <!-- Search -->
+        <div class="col-md-4 offset-md-5 mb-2">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="search user..." aria-label="Recipient's username"
+                    aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn " type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row ml-0 mr-0 user--table">
+        <table id="user-table" class="table table-striped ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Account</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Created at</th>
+                    <th scope="col">Updated at</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+            </thead>
+            <tbody id="admin-user-tbody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- List Status
+Pending: <span class="badge badge-warning">Pending</span>
+Activated: <span class="badge badge-success">Activated</span>
+Deactivated: <span class="badge badge-secondary">Deactivated</span>
+Blocked: <span class="badge badge-danger">Locked</span> -->

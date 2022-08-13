@@ -1,0 +1,623 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+    </ol>
+</nav>
+<div class="profile-wrapper" data-id="<% id %>">
+    <h6>BASIC INFORMATION</h6>
+    <hr />
+
+
+    <div class="row no-gutters">
+        <!-- User avatar -->
+        <div class="col-md-2 col-sm-3 mb-2">
+            <div class="user-detail-avatar"><img src="" /></div>
+            <button class="btn profile--upload"> <i class="fa-solid fa-upload mr-2"></i></button>
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <h5 data-toggle="tooltip" data-placement="left" title="Full Name">
+                <%= inforFilter.name %>
+            </h5>
+            <p data-toggle="tooltip" data-placement="left" title="Phone Number">
+                <i class="fa fa-solid fa fa-phone-flip mr-2"></i><%= inforFilter.phone %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Email">
+                <i class="fa-solid fa-envelope mr-2"></i><%= inforFilter.email %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Birthday">
+                <i class="fa-solid fa-cake-candles mr-2"></i><%= inforFilter.birthday %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Address">
+                <i class="fa-solid fa-location-dot mr-2"></i><%= inforFilter.address %>
+            </p>
+            <p data-toggle="tooltip" data-placement="left" title="Identify Card Number">
+                <i class="fa-solid fa-address-card mr-2"></i><%= inforFilter.ICID %>
+                <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-primary profile-idcard" data-toggle="tooltip"
+                    data-placement="top" title="View Identify Card Photos"></i>
+            </p>
+        </div>
+        <!-- TEST: show status and action by account status, change it later -->
+        <% var status='pending' %>
+
+
+        <div class="col-md-2 col-sm-3">
+
+            <h6>Account status</h6>
+
+
+            <% if(inforFilter.status=='Activated' ) { %>
+            <span class="badge badge-success">Activated</span>
+            <% } %>
+
+            <% if(inforFilter.status=='Pending' || inforFilter.status=='Updating') { %>
+            <span class="badge badge-warning"><%= inforFilter.status %></span>
+            <% } %>
+
+            <% if(inforFilter.status=='Deactivated' ) { %>
+            <span class="badge badge-secondary">Deactivated</span>
+            <% } %>
+
+            <!-- Show this icon when account status is waiting for update -->
+            <% if(inforFilter.status=='Updating') {%>
+            <i class="fa-solid fa-circle-exclamation text-danger" data-toggle="tooltip" data-placement="right"
+                title="You need to update new identify card photos!"></i>
+            <% } %>
+
+            <h6 class="mt-3">Account balance</h6>
+            <p><%= inforFilter.balance %><i class="fa-solid fa-dong-sign"></i></p>
+        </div>
+        <div class="col-md-3 col-sm-3">
+            <h6>Action</h6>
+            <button class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#changePasswordModal">Change
+                Password</button><br />
+            <button class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#editInformationModal">Edit
+                Information</button><br />
+
+            <!-- This button only show when account status is waiting for update  -->
+            <button class="btn btn-outline-warning mb-2" data-toggle="modal" data-target="#updateIDCPhotoModal">Update
+                Identify Card Photo</button><br />
+        </div>
+    </div>
+
+
+    <h6 class="mt-5">TRANSACTION HISTORY</h6>
+    <hr>
+    <div class="row ml-1 mr-1">
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+
+                    <th scope="col">Type</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Execution Time</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i< transInfo.length; i++){%>
+                <tr>
+                    <th scope="row"><i class="fa-solid fa-circle-arrow-up"></i></th>
+
+                    <td><%= transInfo[i].type %></td>
+                    <!-- use javascript to format the total instead of below  -->
+                    <td><%= transInfo[i].total %><i class="fa-solid fa-dong-sign"></i></td>
+                    <td><%= transInfo[i].time %></td>
+                    <% if(transInfo[i].status == "Success") {%>
+                        <td> <span class="badge badge-success"><%= transInfo[i].status %></span></td>
+                    <% }else{ %>
+                    <td> <span class="badge badge-warning"><%= transInfo[i].status %></span></td>
+                    <% } %>
+                    <td>
+                        <!-- if it is a withdrawal => use  data-target="#viewWithdrawUserModal"
+                        if it is a transfer => use data-target="#viewTransferUserModal" 
+                        if it is a buy card transaction => use data-target="#viewBuyCardUserModal"
+                        if it is a recharge => use data-target="#viewRechargeUserModal" -->
+                        <button class="btn btn-outline-primary" data-toggle="modal"
+                            data-target="#viewWithdrawUserModal"><i class="fa-solid fa-search"></i></button>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+<!-- View Identify Card Photo Modal -->
+<div class="modal fade" id="viewIDCPhotoUserModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewIDCPhotoUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewIDCPhotoUserModalLabel">
+                    Identify Card Photos
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Photo of the front of the identity card</p>
+                <img class="d-block w-75 mx-auto" src="/users/<%= inforFilter.front %>" alt="Front photo" />
+                <hr />
+                <p>Photo of the back of the identity card</p>
+                <img class="d-block w-75 mx-auto" src="/users/<%= inforFilter.back %>" alt="Back photo" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Update Identify Card Photo Modal -->
+<div class="modal fade" id="updateIDCPhotoModal" tabindex="-1" role="dialog" aria-labelledby="updateIDCPhotoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateIDCPhotoModalLabel">
+                    Upload New Identify Card Photos
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="icid" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group invisible email-upload">
+                        <div class="input-group mb-3">
+                            <input name="email" id="email" type="text" class="form-control" value="<%= inforFilter.email %>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Photo of the front of the identity card</label>
+                                <div class="input-group mb-3 px-2 rounded bg-white shadow-sm">
+                                    <input name="frontPhoto" type="file" accept="image/*"
+                                        class="form-control border-0 register--form-upload"
+                                        onchange="previewFrontImg(this);" id="registerFrontUpload">
+                                    <label class="font-weight-light text-muted register--form-label">Choose
+                                        file</label>
+                                    <div class="input-group-append">
+                                        <label for="registerFrontUpload" class="btn btn-light my-2 rounded"
+                                            id="registerFrontLabel"> <i
+                                                class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                                class="text-uppercase font-weight-bold text-muted">Choose
+                                                file</small></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Photo of the back of the identity card</label>
+                                <div class="input-group mb-3 px-2 rounded bg-white shadow-sm">
+                                    <input name="backPhoto" type="file" accept="image/*"
+                                        class="form-control border-0 register--form-upload"
+                                        onchange="previewBackImg(this);" id="registerBackUpload">
+                                    <label class="font-weight-light text-muted register--form-label">Choose
+                                        file</label>
+                                    <div class="input-group-append">
+                                        <label for="registerBackUpload" class="btn btn-light my-2 rounded"
+                                            id="registerBackLabel"> <i
+                                                class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                                class="text-uppercase font-weight-bold text-muted">Choose
+                                                file</small></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="register--image-area"><img id="registerFrontImg" src="#" alt=""
+                                    class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                        </div>
+
+                        <div class="col">
+                            <div class="register--image-area"><img id="registerBackImg" src="#" alt=""
+                                    class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-primary btn-modal-submit">Upload</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">
+                    Change Password
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+
+                <div class="modal-body">
+                    <div class="form-group mb-3">
+                        <label>Enter current Password</label>
+                        <input name="currentpwd" type="password" class="form-control" maxlength="6">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Enter New Password</label>
+                        <input name="newpwd" type="password" class="form-control" maxlength="6">
+                    </div>
+                    <div class="form-group mb-3">
+
+                        <label>Re-enter New Password</label>
+                        <input name="renewpwd" type="password" class="form-control" maxlength="6">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary btn-modal-change-password"
+                        data-dismiss="modal">Change</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit information Modal -->
+<div class="modal fade" id="editInformationModal" tabindex="-1" role="dialog"
+    aria-labelledby="editInformationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editInformationModalLabel">
+                    Edit Basic Information
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+
+                <div class="modal-body">
+                    <div class="row ">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="firstname">First Name</label>
+                                <div class="input-group mb-3">
+
+                                    <input name="firstname" type="text" class="form-control"
+                                        placeholder="get current user data here">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <div class="input-group mb-3">
+
+                                    <input name="lastname" type="text" class="form-control"
+                                        placeholder="get current user data here">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phonenumber">Phone Number</label>
+                        <div class="input-group mb-3">
+
+                            <input name="phonenumber" type="text" class="form-control"
+                                placeholder="get current user data here">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="input-group mb-3">
+
+                            <input name="email" type="text" class="form-control"
+                                placeholder="get current user data here">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday">Birthday</label>
+                        <div class="input-group mb-3">
+
+                            <input placeholder="get current user data here" class="form-control" type="text"
+                                onfocus="(this.type='date')" name="birthday">
+                            <!-- <input name="birthday" type="date" class="form-control"
+                                placeholder="get current user data here"> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <div class="input-group mb-3">
+
+                            <input name="address" type="text" class="form-control"
+                                placeholder="get current user data here">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardnumber">Identity Card Number</label>
+                        <div class="input-group mb-3">
+                            <input name="cardnumber" type="text" class="form-control"
+                                placeholder="get current user data here">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary btn-modal-edit-info"
+                        data-dismiss="modal">Update</button>
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- View Transfer detail Modal -->
+<div class="modal fade" id="viewTransferUserModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewTransferUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewTransferUserModalLabel">
+                    Transaction Details
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center mb-3">
+                    <h5>TRANSFER</h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Transaction ID</h6>
+                        <p>14629124</p>
+                    </div>
+                    <div class="col">
+                        <!-- Here use fullname -->
+                        <h6>Sender Name</h6>
+                        <p>9237595</p>
+                    </div>
+                    <div class="col">
+                        <h6>Receiver Name</h6>
+                        <p>9237595</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h6>Fee</h6>
+                        <p>0 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                    <div class="col">
+                        <h6>Total</h6>
+                        <p>-5.000.000 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Message</h6>
+                        <p>"Love u to the moon and back"</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- View Withdraw detail Modal -->
+<div class="modal fade" id="viewWithdrawUserModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewWithdrawUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewWithdrawUserModalLabel">
+                    Transaction Details
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center mb-3">
+                    <h5>WITHDRAWAL</h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Transaction ID</h6>
+                        <p>14629124</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h6>Fee</h6>
+                        <p>0 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                    <div class="col">
+                        <h6>Total</h6>
+                        <p>-5.000.000 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- View Recharge detail Modal -->
+<div class="modal fade" id="viewRechargeUserModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewRechargeUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewRechargeUserModalLabel">
+                    Transaction Details
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center mb-3">
+                    <h5>RECHARGE</h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Transaction ID</h6>
+                        <p>14629124</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h6>Fee</h6>
+                        <p>0 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                    <div class="col">
+                        <h6>Total</h6>
+                        <p>-5.000.000 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Buy Card detail Modal -->
+<div class="modal fade" id="viewBuyCardUserModal" tabindex="-1" role="dialog"
+    aria-labelledby="viewBuyCardUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewBuyCardUserModalLabel">
+                    Transaction Details
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center mb-3">
+                    <h5>BUY CARD CODE</h5>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Transaction ID</h6>
+                        <p>14629124</p>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Service Provider</h6>
+                        <p>Viettel</p>
+                    </div>
+                    <div class="col">
+                        <h6>Card Code</h6>
+                        <p>14629124</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h6>Fee</h6>
+                        <p>0 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                    <div class="col">
+                        <h6>Total</h6>
+                        <p>-5.000.000 <i class="fa-solid fa-dong-sign"></i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- List icon for transaction
+Recharge: <i class="fa-solid fa-circle-arrow-down"></i>
+Withdraw: <i class="fa-solid fa-circle-arrow-up"></i>
+Transfer: <i class="fa-solid fa-repeat"></i>
+Buy card: <i class="fa-solid fa-sim-card"></i> -->
+
+
+<!-- List of transaction status
+    Recharge + Buy card only use successful or failed
+Pending: <span class="badge badge-warning">Pending</span>
+Approved or Successful (approved for withdraw or transfer only): <span class="badge badge-success">Approved/Successful</span>
+Cancel: <span class="badge badge-secondary">Cancel</span>
+Failed: <span class="badge badge-danger">Failed</span>
+Success:  <span class="badge badge-success">Successful</span> -->
+
+<% if(success.length > 0) {%>
+<!-- Success alert-->
+<div class="alert alert-success alert-dismissible" id="alert-successful" role="alert">
+    <%= success %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<% } %>
+<!-- Success alert-->
+<div class="alert alert-success alert-dismissible fade hide" id="alert-successful" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Fail alert -->
+<div class="alert alert-danger alert-dismissible fade hide" id="alert-error" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Warning alert -->
+<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Message here
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div> -->

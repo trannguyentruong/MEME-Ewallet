@@ -1,0 +1,93 @@
+<div class="fluid-container login--container">
+    <img class="login--img-background" src="./img/login.png">
+
+
+    <div class="row justify-content-center align-items-center login--body">
+        <div class="col-md-10 col-lg-8 col-xl-2 fluid-container login--body-left">
+            <div class="row justify-content-center">
+                <header class="login--header">
+                    <a class="brand--logo" href="/">
+                        <div class="login--brand login--brand-header">
+                            <div class="login--brand login--brand-logo">
+                                MeMe.
+                            </div>
+                        </div>
+                    </a>
+                </header>
+
+            </div>
+            <div class="row justify-content-center">
+                <p>If you don't have an account</p>
+            </div>
+            <div class="row login--nav-register justify-content-center">
+                <p>You can <a href="/register">Register here!</a></p>
+            </div>
+            <div class="row align-self-end ">
+                <img src="./img/login-component-02.png">
+            </div>
+
+
+
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-4 login--body-center "><img src="./img/login-component-01.png">
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-3 login--form-container">
+            <div class="p-3 rounded bg-muted">
+                <form method="POST" id="loginForm" action="/user/login">
+                    <p class="login--form-header text-center">Log In</p>
+                    <div class="form-group">
+
+                        <label for="username">Username</label>
+                        <div class="input-group mb-3">
+                            <input name="username" id="login-username" type="text" class="form-control" maxlength="10">
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="password-1">Password</label>
+                        <div class="password--wrapper">
+                            <div class="input-group mb-3 password-dot">
+                                <input name="pwdMot" type="password" placeholder="&#9679;"
+                                    class="form-control password-dots out--dot-left dot-start" maxlength="1">
+                                <input name="pwdHai" type="password" placeholder="&#9679;"
+                                    class="form-control password-dots out--dot-left" maxlength="1">
+                                <input name="pwdBa" type="password" placeholder="&#9679;"
+                                    class="form-control password-dots out--dot-left" maxlength="1">
+                                <input name="pwdBon" type="password" placeholder="&#9679;"
+                                    class="form-control password-dots out--dot-right" maxlength="1">
+                                <input name="pwdNam" type="password" placeholder="&#9679;"
+                                    class="form-control password-dots out--dot-right" maxlength="1">
+                                <input name="pwdSau" type="password" placeholder="&#9679;"
+                                    class="form-control password-dots out--dot-right dot-end" maxlength="1">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                            <label class="custom-control-label" for="customCheck">Remember</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center login--form-login-btn">
+                        <button class="btn btn-login" type="submit">Log In</button>
+                    </div>
+                    <div class="form-group login--form-forgotpwd ">
+                        <a class="text-dark" href="/forgot">Forgot your password?</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fail alert -->
+<% if(error.length >0) {%>
+    <div class="alert alert-danger alert-dismissible show" role="alert">
+        <%= error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% } %>
